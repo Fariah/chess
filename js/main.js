@@ -1,12 +1,12 @@
 var figures = {
-    Ferz_a1:    {x: 43, y: 42},
-    Horse_b1:   {x: 78, y: 42},
-    Oficer_c1:  {x: 113, y: 42},
-    King_d1:    {x: 148, y: 42},
-    Quin_e1:    {x: 183, y: 42},
-    Oficer_f1:  {x: 218, y: 42},
-    Horse_g1:   {x: 253, y: 42},
-    Ferz_h1:    {x: 288, y: 42},
+    Ferz_a1: {x: 43, y: 42},
+    Horse_b1: {x: 78, y: 42},
+    Oficer_c1: {x: 113, y: 42},
+    King_d1: {x: 148, y: 42},
+    Quin_e1: {x: 183, y: 42},
+    Oficer_f1: {x: 218, y: 42},
+    Horse_g1: {x: 253, y: 42},
+    Ferz_h1: {x: 288, y: 42},
     Warior_a2: {x: 43, y: 78},
     Warior_b2: {x: 78, y: 78},
     Warior_c2: {x: 113, y: 78},
@@ -15,7 +15,6 @@ var figures = {
     Warior_f2: {x: 218, y: 78},
     Warior_g2: {x: 253, y: 78},
     Warior_h2: {x: 288, y: 78},
-
     Warior_a7: {x: 43, y: 253},
     Warior_b7: {x: 78, y: 253},
     Warior_c7: {x: 113, y: 253},
@@ -24,7 +23,6 @@ var figures = {
     Warior_f7: {x: 218, y: 253},
     Warior_g7: {x: 253, y: 253},
     Warior_h7: {x: 288, y: 253},
-    
     Ferz_a8: {x: 43, y: 288},
     Horse_b8: {x: 78, y: 288},
     Oficer_c8: {x: 113, y: 288},
@@ -44,7 +42,6 @@ var fields = {
     f1: {x: 218, y: 43},
     g1: {x: 253, y: 43},
     h1: {x: 288, y: 43},
-    
     a2: {x: 43, y: 78},
     b2: {x: 78, y: 78},
     c2: {x: 113, y: 78},
@@ -53,7 +50,6 @@ var fields = {
     f2: {x: 218, y: 78},
     g2: {x: 253, y: 78},
     h2: {x: 288, y: 78},
-    
     a3: {x: 43, y: 113},
     b3: {x: 78, y: 113},
     c3: {x: 113, y: 113},
@@ -62,7 +58,6 @@ var fields = {
     f3: {x: 218, y: 113},
     g3: {x: 253, y: 113},
     h3: {x: 288, y: 113},
-    
     a4: {x: 43, y: 148},
     b4: {x: 78, y: 148},
     c4: {x: 113, y: 148},
@@ -71,7 +66,6 @@ var fields = {
     f4: {x: 218, y: 148},
     g4: {x: 253, y: 148},
     h4: {x: 288, y: 148},
-    
     a5: {x: 43, y: 183},
     b5: {x: 78, y: 183},
     c5: {x: 113, y: 183},
@@ -80,7 +74,6 @@ var fields = {
     f5: {x: 218, y: 183},
     g5: {x: 253, y: 183},
     h5: {x: 288, y: 183},
-    
     a6: {x: 43, y: 218},
     b6: {x: 78, y: 218},
     c6: {x: 113, y: 218},
@@ -89,7 +82,6 @@ var fields = {
     f6: {x: 218, y: 218},
     g6: {x: 253, y: 218},
     h6: {x: 288, y: 218},
-    
     a7: {x: 43, y: 253},
     b7: {x: 78, y: 253},
     c7: {x: 113, y: 253},
@@ -98,7 +90,6 @@ var fields = {
     f7: {x: 218, y: 253},
     g7: {x: 253, y: 253},
     h7: {x: 288, y: 253},
-    
     a8: {x: 43, y: 288},
     b8: {x: 78, y: 288},
     c8: {x: 113, y: 288},
@@ -108,3 +99,34 @@ var fields = {
     g8: {x: 253, y: 288},
     h8: {x: 288, y: 288},
 }
+
+$(document).ready(function() {
+    var boardClass = function(elem) {
+//        console.log('$(elem)', $(elem).offset());
+        var $board = $(elem),
+                $currentFigure = null,
+                $figures = $(".figure"),
+                $board_ofset = $(elem).offset()
+                ;
+
+        $board.on("mousemove", function($e) {
+            if ($board.$currentFigure) {
+                $board.$currentFigure.css({
+                    'left': $e.clientX - 10 - $board_ofset.left,
+                    'top': $e.clientY - 10 - $board_ofset.top
+                });
+            }
+        });
+
+        $figures.on("mousedown", function() {
+            $board.$currentFigure = $(this);
+        });
+
+        $board.on("mouseup", function() {
+            $board.$currentFigure = null;
+        });
+
+    };
+
+    board = new boardClass("#chessDesck");
+});

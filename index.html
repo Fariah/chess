@@ -22,6 +22,8 @@
           <script src="../../assets/js/html5shiv.js"></script>
           <script src="../../assets/js/respond.min.js"></script>
         <![endif]-->
+<!--        <script>
+        </script>-->
     </head>
     <body>
 
@@ -191,8 +193,8 @@
                         <td class="empty"></td>
                     </tr>
                 </table>
-                <input type="text" id="mouseX">
-                <input type="text" id="mouseY">
+<!--                <input type="text" id="mouseX">
+                <input type="text" id="mouseY">-->
             </div>
 
             <div id="footer">
@@ -202,28 +204,4 @@
             </div>
         </div>
     </body>
-
-    <script>
-//        $("#chessDesck").mousemove(function(event) {
-////            console.log("event.target.offsetLeft ", event.target.offsetLeft);
-////            console.log("event.target.offsetTop ", event.target.offsetTop);
-//            $('#mouseX').val(event.target.offsetLeft);
-//            $('#mouseY').val(event.target.offsetTop);
-//        });
-        function moveFigure(element) {
-            alert('move');
-            console.log('element: ', element);
-        }
-        $( document ).ready(function() {
-            
-            $('.figure').mousedown(function(event){
-                console.log('$(this): ', $(this).attr('id'));
-                var coordinates = figures[$(this).attr('id')];
-                console.log('coordinates ', coordinates);
-    //            $(this)
-    //            console.log("event.target.offsetLeft ", this.target.offsetLeft);
-    //            console.log("event.target.offsetTop ", this.target.offsetTop);
-            });
-        });
-    </script>
 </html>
