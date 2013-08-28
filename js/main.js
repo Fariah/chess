@@ -33,7 +33,7 @@
 //    Ferz_h8: {x: 288, y: 288}
 //};
 
-var fields = {
+var $fields_coords = {
     a1: {x: 43, y: 43},
     b1: {x: 78, y: 43},
     c1: {x: 113, y: 43},
@@ -99,9 +99,28 @@ var fields = {
     g8: {x: 253, y: 288},
     h8: {x: 288, y: 288},
 }
+var $coord_map = {};
+var $alfa = {
+    1: 'a',
+    2: 'b',
+    3: 'c',
+    4: 'd',
+    5: 'e',
+    6: 'f',
+    7: 'g',
+    8: 'h',
+};
+for(var i=1; i<9; i++) {
+    $coord_map[i] = {};
+    for(var k=1; k<9; k++) {
+        $coord_map[i][k] = $alfa[i]+k;
+    }
+}
+//console.log('$coord_map: ', $coord_map);
 
 $(document).ready(function() {
     var boardClass = function(elem) {
+        var $field;
         var $stage = Math.floor((parseInt($(elem).css('width')))/10);
 
         var $board = $(elem),
@@ -113,13 +132,15 @@ $(document).ready(function() {
 
         $board.on("mousemove", function($e) {
             if ($board.$currentFigure) {
-                var $mouseX = Math.floor($e.clientX - 20 - $board_ofset.left);
-                var $mouseY = Math.floor($e.clientY - 20 - $board_ofset.top);
-                
-                $('#mouseX').val(Math.round($mouseX / $stage));
-                $('#mouseY').val(Math.round($mouseY / $stage));
+                var $mouseX = Math.floor($e.clientX - 10 - $board_ofset.left);
+                var $mouseY = Math.floor($e.clientY - 10 - $board_ofset.top);
 
                 if($mouseX > 35 && $mouseY > 35 && $mouseX < 296 && $mouseY < 296) {
+                    field = $coord_map[Math.round(($mouseX-10) / $stage)][Math.round(($mouseY-10) / $stage)];
+                
+//                    $('#mouseX').val(Math.round(($mouseX-10) / $stage));
+//                    $('#mouseY').val(Math.round(($mouseY-10) / $stage));
+                    $('#FIELD').val(field);
                     $board.$currentFigure.css({
                         'left': $e.clientX - 10 - $board_ofset.left,
                         'top': $e.clientY - 10 - $board_ofset.top
@@ -133,14 +154,13 @@ $(document).ready(function() {
         });
 
         $board.on("mouseup", function($e) {
-//            console.log('$e.clientX: ', $e.clientX - $board_ofset.left - 43);
-//            console.log('$e.clientY: ', $e.clientY - $board_ofset.top - 43);
+            $board.$currentFigure.css({
+                'left': $fields_coords[field].x,
+                'top': $fields_coords[field].y
+            });
             
             $board.$currentFigure = null;
         });
-//        $fields.on("mouseup", function() {
-//            console.log('$fields: ', $(this));
-//        });
 
     };
 
