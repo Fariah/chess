@@ -1,37 +1,37 @@
-var figures = {
-    Ferz_a1: {x: 43, y: 42},
-    Horse_b1: {x: 78, y: 42},
-    Oficer_c1: {x: 113, y: 42},
-    King_d1: {x: 148, y: 42},
-    Quin_e1: {x: 183, y: 42},
-    Oficer_f1: {x: 218, y: 42},
-    Horse_g1: {x: 253, y: 42},
-    Ferz_h1: {x: 288, y: 42},
-    Warior_a2: {x: 43, y: 78},
-    Warior_b2: {x: 78, y: 78},
-    Warior_c2: {x: 113, y: 78},
-    Warior_d2: {x: 148, y: 78},
-    Warior_e2: {x: 183, y: 78},
-    Warior_f2: {x: 218, y: 78},
-    Warior_g2: {x: 253, y: 78},
-    Warior_h2: {x: 288, y: 78},
-    Warior_a7: {x: 43, y: 253},
-    Warior_b7: {x: 78, y: 253},
-    Warior_c7: {x: 113, y: 253},
-    Warior_d7: {x: 148, y: 253},
-    Warior_e7: {x: 183, y: 253},
-    Warior_f7: {x: 218, y: 253},
-    Warior_g7: {x: 253, y: 253},
-    Warior_h7: {x: 288, y: 253},
-    Ferz_a8: {x: 43, y: 288},
-    Horse_b8: {x: 78, y: 288},
-    Oficer_c8: {x: 113, y: 288},
-    King_d8: {x: 148, y: 288},
-    Quin_e8: {x: 183, y: 288},
-    Oficer_f8: {x: 218, y: 288},
-    Horse_g8: {x: 253, y: 288},
-    Ferz_h8: {x: 288, y: 288}
-};
+//var figures = {
+//    Ferz_a1: {x: 43, y: 42},
+//    Horse_b1: {x: 78, y: 42},
+//    Oficer_c1: {x: 113, y: 42},
+//    King_d1: {x: 148, y: 42},
+//    Quin_e1: {x: 183, y: 42},
+//    Oficer_f1: {x: 218, y: 42},
+//    Horse_g1: {x: 253, y: 42},
+//    Ferz_h1: {x: 288, y: 42},
+//    Warior_a2: {x: 43, y: 78},
+//    Warior_b2: {x: 78, y: 78},
+//    Warior_c2: {x: 113, y: 78},
+//    Warior_d2: {x: 148, y: 78},
+//    Warior_e2: {x: 183, y: 78},
+//    Warior_f2: {x: 218, y: 78},
+//    Warior_g2: {x: 253, y: 78},
+//    Warior_h2: {x: 288, y: 78},
+//    Warior_a7: {x: 43, y: 253},
+//    Warior_b7: {x: 78, y: 253},
+//    Warior_c7: {x: 113, y: 253},
+//    Warior_d7: {x: 148, y: 253},
+//    Warior_e7: {x: 183, y: 253},
+//    Warior_f7: {x: 218, y: 253},
+//    Warior_g7: {x: 253, y: 253},
+//    Warior_h7: {x: 288, y: 253},
+//    Ferz_a8: {x: 43, y: 288},
+//    Horse_b8: {x: 78, y: 288},
+//    Oficer_c8: {x: 113, y: 288},
+//    King_d8: {x: 148, y: 288},
+//    Quin_e8: {x: 183, y: 288},
+//    Oficer_f8: {x: 218, y: 288},
+//    Horse_g8: {x: 253, y: 288},
+//    Ferz_h8: {x: 288, y: 288}
+//};
 
 var fields = {
     a1: {x: 43, y: 43},
@@ -102,19 +102,29 @@ var fields = {
 
 $(document).ready(function() {
     var boardClass = function(elem) {
-//        console.log('$(elem)', $(elem).offset());
+        var $stage = Math.floor((parseInt($(elem).css('width')))/10);
+
         var $board = $(elem),
-                $currentFigure = null,
-                $figures = $(".figure"),
-                $board_ofset = $(elem).offset()
+                $currentFigure  = null,
+                $figures        = $(".figure"),
+                $fields         = $('.field'),
+                $board_ofset    = $(elem).offset()
                 ;
 
         $board.on("mousemove", function($e) {
             if ($board.$currentFigure) {
-                $board.$currentFigure.css({
-                    'left': $e.clientX - 10 - $board_ofset.left,
-                    'top': $e.clientY - 10 - $board_ofset.top
-                });
+                var $mouseX = Math.floor($e.clientX - 20 - $board_ofset.left);
+                var $mouseY = Math.floor($e.clientY - 20 - $board_ofset.top);
+                
+                $('#mouseX').val(Math.round($mouseX / $stage));
+                $('#mouseY').val(Math.round($mouseY / $stage));
+
+                if($mouseX > 35 && $mouseY > 35 && $mouseX < 296 && $mouseY < 296) {
+                    $board.$currentFigure.css({
+                        'left': $e.clientX - 10 - $board_ofset.left,
+                        'top': $e.clientY - 10 - $board_ofset.top
+                    });
+                }
             }
         });
 
@@ -122,9 +132,15 @@ $(document).ready(function() {
             $board.$currentFigure = $(this);
         });
 
-        $board.on("mouseup", function() {
+        $board.on("mouseup", function($e) {
+//            console.log('$e.clientX: ', $e.clientX - $board_ofset.left - 43);
+//            console.log('$e.clientY: ', $e.clientY - $board_ofset.top - 43);
+            
             $board.$currentFigure = null;
         });
+//        $fields.on("mouseup", function() {
+//            console.log('$fields: ', $(this));
+//        });
 
     };
 
