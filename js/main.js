@@ -154,10 +154,12 @@ $(document).ready(function() {
         });
 
         $board.on("mouseup", function($e) {
-            $board.$currentFigure.css({
-                'left': $fields_coords[field].x,
-                'top': $fields_coords[field].y
-            });
+            if ($board.$currentFigure) {
+                $board.$currentFigure.css({
+                    'left': $fields_coords[field].x,
+                    'top': $fields_coords[field].y
+                });
+            }
             
             $board.$currentFigure = null;
         });
