@@ -22,8 +22,14 @@
           <script src="../../assets/js/html5shiv.js"></script>
           <script src="../../assets/js/respond.min.js"></script>
         <![endif]-->
-<!--        <script>
-        </script>-->
+        <script>
+            //console.log('$fields_coords: ', $fields_coords);
+
+            $(document).ready(function() {
+                board = new boardClass();
+                board.init();
+            });
+        </script>
     </head>
     <body>
 
