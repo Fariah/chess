@@ -1,17 +1,29 @@
-var wariorClass = function(figure, old_pos, new_pos) {
 
-    this.figure = figure;
+/*
+ * Класс пешки, принимает 3 параметра
+ * 
+ * old_pos - string, координаты стартовой позиции фигуры, например "a2"
+ * new_pos - string, координаты конечной позиции фигуры, например "a4" 
+ * 
+ */
+var wariorClass = function(old_pos, new_pos) {
+
     this.old_pos = old_pos;
     this.new_pos = new_pos;
 
-    this.getInfo = function () {
-        var alfa = this.old_pos[0];
-        var num = this.old_pos[1];
+/*
+ *  метод возвращает координаты стандартного хода пешки (пока только 1 вперед)
+ */
+    this.getStdMove = function () {
+        var alfa = this.old_pos[0],
+            num = this.old_pos[1];
 
-        return alfa + ( parseInt(num)+1);
+        return [alfa + ( parseInt(num)+1)];
     };
 }
-
+/*
+ *  Класс шахматной доски, включает метод инициализации и методы обработки ходов
+ */
 var boardClass = function() {
 
     var $mouse_const    = 10;
@@ -32,25 +44,24 @@ var boardClass = function() {
     ;
 
     function check_move($figure, $old, $new) {
-//        console.log('$figure: ', $figure);
-//        console.log('$old: ', $old);
-//        console.log('$new: ', $new);
 
         if($figure in $figure_types) {
-            var $obj = new window[$figure_types[$figure]['class']]($figure, $old, $new);
-            if($obj.getInfo() == $new) {
-                $('#HistoryMove').append($figure + ": " + $old + "->" + $new + "<br />");
-                return true;
-            }
-            else {
-                return false;
-            }
+            var $result = false,
+                $obj = new window[$figure_types[$figure]['class']]($old, $new),
+                $data = $obj.getStdMove();
+
+            $.each($data, function(index, value) {
+                if(value == $new) {
+                    $('#HistoryMove').append($figure + ": " + $old + "->" + $new + "<br />");
+                    $result = true;
+                }
+            });
+            return $result;
         }
     }
 
-    // Функция доступная только внутри класса.
     function figure_move($mouse, $figure) {
-//        console.log('check_move: ', check_move($figure.context.classList[1], $old_position, $field));
+
         if(check_move($figure.context.classList[1], $old_position, $field) == true) {
             $figure.css({
                 'left': $fields_coords[$field].x,
@@ -64,12 +75,11 @@ var boardClass = function() {
                 'z-index': 1
             });
         }
-//            return true;
     }
 
     function get_curr_position($e) {
-        var $mouseX = Math.floor($e.clientX - $mouse_const -  $board_ofset.left);
-        var $mouseY = Math.floor($e.clientY - $mouse_const - $board_ofset.top);
+        var $mouseX = Math.floor($e.clientX - $mouse_const -  $board_ofset.left),
+            $mouseY = Math.floor($e.clientY - $mouse_const - $board_ofset.top);
 
         if ($mouseX > $stage && $mouseY > $stage && $mouseX < $stage * 8 + 16 && $mouseY < $stage * 8 + 16) {
             $field = $coord_map[Math.round(($mouseX - $mouse_const) / $stage)][Math.round(($mouseY - $mouse_const) / $stage)];
@@ -86,13 +96,11 @@ var boardClass = function() {
 
     function mouse_move($e) {
 
-        var $mouseX = Math.floor($e.clientX - $mouse_const -  $board_ofset.left);
-        var $mouseY = Math.floor($e.clientY - $mouse_const - $board_ofset.top);
+        var $mouseX = Math.floor($e.clientX - $mouse_const -  $board_ofset.left),
+            $mouseY = Math.floor($e.clientY - $mouse_const - $board_ofset.top);
 
         if ($mouseX > $stage && $mouseY > $stage && $mouseX < $stage * 8 + 16 && $mouseY < $stage * 8 + 16) {
             $field = $coord_map[Math.round(($mouseX - $mouse_const) / $stage)][Math.round(($mouseY - $mouse_const) / $stage)];
-
-//            $('#FIELD').val($field);
             $board.$currentFigure.css({
                 'left': $e.clientX - $mouse_const - $board_ofset.left,
                 'top': $e.clientY - $mouse_const - $board_ofset.top,
@@ -112,11 +120,6 @@ var boardClass = function() {
             $figure_types= {
                 warior: {
                     class: 'wariorClass'
-//                    first_step: true,
-//                    step: 1,
-//                    direction: 'F',
-//                    strike: 'angle',
-//                    move_back: false
                 }
             },
             $alfa = {
@@ -155,7 +158,6 @@ var boardClass = function() {
                 if ($board.$currentFigure && $field) {
                     figure_move($e, $board.$currentFigure);
                 }
-
                 $board.$currentFigure = null;
             });
         }
