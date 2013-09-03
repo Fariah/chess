@@ -1,5 +1,6 @@
 var boardClass = function() {
 
+    var mouse_const = 10;
     var $fields_coords = {},
         $coord_map= {},
         $field= null,
@@ -14,25 +15,30 @@ var boardClass = function() {
     ;
 
     // Функция доступная только внутри класса.
-    function figure_move(figure) {
-        console.log('figure: ', figure);
+    function figure_move($mouse, $figure) {
+        console.log('$mouse: ', $mouse);
+        console.log('$figure: ', $figure);
+        console.log('$field: ', $field);
+        $figure.css({
+            'left': $fields_coords[$field].x,
+            'top': $fields_coords[$field].y,
+            'z-index': 1
+        });
 //            return true;
     }
 
     function mouse_move($e) {
 
-        var $mouseX = Math.floor($e.clientX - 10 -  $board_ofset.left);
-        var $mouseY = Math.floor($e.clientY - 10 - $board_ofset.top);
+        var $mouseX = Math.floor($e.clientX - mouse_const -  $board_ofset.left);
+        var $mouseY = Math.floor($e.clientY - mouse_const - $board_ofset.top);
 
         if ($mouseX > $stage && $mouseY > $stage && $mouseX < $stage * 8 + 16 && $mouseY < $stage * 8 + 16) {
-            $field = $coord_map[Math.round(($mouseX - 10) / $stage)][Math.round(($mouseY - 10) / $stage)];
+            $field = $coord_map[Math.round(($mouseX - mouse_const) / $stage)][Math.round(($mouseY - mouse_const) / $stage)];
 
-//                    $('#mouseX').val(Math.round(($mouseX-10) / $stage));
-//                    $('#mouseY').val(Math.round(($mouseY-10) / $stage));
             $('#FIELD').val($field);
             $board.$currentFigure.css({
-                'left': $e.clientX - 10 - $board_ofset.left,
-                'top': $e.clientY - 10 - $board_ofset.top,
+                'left': $e.clientX - mouse_const - $board_ofset.left,
+                'top': $e.clientY - mouse_const - $board_ofset.top,
                 'z-index': 10
             });
         }
@@ -82,17 +88,12 @@ var boardClass = function() {
             });
 
             $figures.on("mousedown", function() {
-                figure_move(this);
                 $board.$currentFigure = $(this);
             });
 
             $board.on("mouseup", function($e) {
                 if ($board.$currentFigure && $field) {
-                    $board.$currentFigure.css({
-                        'left': $fields_coords[$field].x,
-                        'top': $fields_coords[$field].y,
-                        'z-index': 1
-                    });
+                    figure_move($e, $board.$currentFigure);
                 }
 
                 $board.$currentFigure = null;
