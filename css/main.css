@@ -54,6 +54,7 @@ DESC STYLE
     border: 1px solid #222222;
     width: 35px;
     height: 35px;
+    position: relative;
 }
 .field.dark {
     background-color: #cccccc;
@@ -67,8 +68,11 @@ DESC STYLE
     border: 1px solid #777777;
     cursor: pointer;
     z-index: 1;
+    position: absolute;
+    top: 7px;
+    left: 7px;
 }
-.warior {
+.warrior {
     background-color: #449d44;
 }
 .ferz {
@@ -77,7 +81,7 @@ DESC STYLE
 .horse {
     background-color: violet;
 }
-.oficer {
+.elephant {
     background-color: #c09853;
 }
 .king {
@@ -85,87 +89,4 @@ DESC STYLE
 }
 .quin {
     background-color: gold;
-}
-/*##### FIGURE POSITIONS #####*/
-/*############################*/
-#Ferz_a1 {
-    left: 43px;
-    position: absolute;
-    top: 42px;
-}
-#Horse_b1 {
-    left: 78px;
-    position: absolute;
-    top: 42px;
-}
-#Oficer_c1 {
-    left: 113px;
-    position: absolute;
-    top: 42px;
-}
-#King_d1 {
-    left: 148px;
-    position: absolute;
-    top: 42px;
-}
-#Quin_e1 {
-    left: 183px;
-    position: absolute;
-    top: 42px;
-}
-#Oficer_f1 {
-    left: 218px;
-    position: absolute;
-    top: 42px;
-}
-#Horse_g1 {
-    left: 253px;
-    position: absolute;
-    top: 42px;
-}
-#Ferz_h1 {
-    left: 288px;
-    position: absolute;
-    top: 42px;
-}
-
-#Warior_a2 {
-    left: 43px;
-    position: absolute;
-    top: 78px;
-}
-#Warior_b2 {
-    left: 78px;
-    position: absolute;
-    top: 78px;
-}
-#Warior_c2 {
-    left: 113px;
-    position: absolute;
-    top: 78px;
-}
-#Warior_d2 {
-    left: 148px;
-    position: absolute;
-    top: 78px;
-}
-#Warior_e2 {
-    left: 183px;
-    position: absolute;
-    top: 78px;
-}
-#Warior_f2 {
-    left: 218px;
-    position: absolute;
-    top: 78px;
-}
-#Warior_g2 {
-    left: 253px;
-    position: absolute;
-    top: 78px;
-}
-#Warior_h2 {
-    left: 288px;
-    position: absolute;
-    top: 78px;
 }

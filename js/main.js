@@ -18,6 +18,8 @@ var wariorClass = function(old_pos, new_pos) {
         var alfa = this.old_pos[0],
             num = this.old_pos[1];
 
+        console.log('getStdMove: ', [alfa + ( parseInt(num)+1)]);
+
         return [alfa + ( parseInt(num)+1)];
     };
 }
@@ -63,12 +65,14 @@ var boardClass = function() {
     function figure_move($mouse, $figure) {
 
         if(check_move($figure.context.classList[1], $old_position, $field) == true) {
+            console.log('figure_move: ', $old_coords);
             $figure.css({
                 'left': $fields_coords[$field].x,
                 'top': $fields_coords[$field].y,
                 'z-index': 1
             });
         } else {
+            console.log('figure_move else: ', $old_coords);
             $figure.css({
                 'left': $old_coords.x,
                 'top': $old_coords.y,
@@ -81,6 +85,7 @@ var boardClass = function() {
         var $mouseX = Math.floor($e.clientX - $mouse_const -  $board_ofset.left),
             $mouseY = Math.floor($e.clientY - $mouse_const - $board_ofset.top);
 
+        //console.log('get_curr_position: ', $fields_coords);
         if ($mouseX > $stage && $mouseY > $stage && $mouseX < $stage * 8 + 16 && $mouseY < $stage * 8 + 16) {
             $field = $coord_map[Math.round(($mouseX - $mouse_const) / $stage)][Math.round(($mouseY - $mouse_const) / $stage)];
             $old_coords = {
@@ -98,6 +103,10 @@ var boardClass = function() {
 
         var $mouseX = Math.floor($e.clientX - $mouse_const -  $board_ofset.left),
             $mouseY = Math.floor($e.clientY - $mouse_const - $board_ofset.top);
+
+        //console.log('$e: ', $e);
+        //console.log('$mouseX: ', $mouseX);
+        //console.log('$mouseY: ', $mouseY);
 
         if ($mouseX > $stage && $mouseY > $stage && $mouseX < $stage * 8 + 16 && $mouseY < $stage * 8 + 16) {
             $field = $coord_map[Math.round(($mouseX - $mouse_const) / $stage)][Math.round(($mouseY - $mouse_const) / $stage)];
@@ -136,12 +145,17 @@ var boardClass = function() {
                 $coord_map[i] = {};
                 for (var k = 1; k < 9; k++) {
                     $fields_coords[$alfa[i] + k] = {
-                        x: 43 + 35 * (i - 1), 
-                        y: 43 + 35 * (k - 1)
+                        //x: 43 + 35 * (i - 1),
+                        //y: 43 + 35 * (k - 1)
+                        x: 0,
+                        y: 35 * (k - 2)
                     };
                     $coord_map[i][k] = $alfa[i] + k;
                 }
             }
+
+            console.log('$coord_map: ', $coord_map);
+            console.log('$fields_coords: ', $fields_coords);
 
             $board.on("mousemove", function($e) {
                 if ($board.$currentFigure) {

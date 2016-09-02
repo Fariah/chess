@@ -10,12 +10,12 @@
         <link href="css/main.css" rel="stylesheet" media="screen">
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="//code.jquery.com/jquery.js"></script>
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <!--<script src="//code.jquery.com/jquery.js"></script>-->
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
 
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/main_new.js"></script>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -26,8 +26,9 @@
             //console.log('$fields_coords: ', $fields_coords);
 
             $(document).ready(function() {
-                board = new boardClass();
-                board.init();
+                board.init({
+                    container: "#Board"
+                });
             });
         </script>
     </head>
@@ -44,165 +45,8 @@
                 <!--<p class="lead">Развлекаемся шахматами</p>-->
                 <!--<p>Use <a href="../sticky-footer-navbar">the sticky footer with a fixed navbar</a> if need be, too.</p>-->
             </div>
-            <div class="container">
-                <table class="desck" id="chessDesck">
-                    <tr>
-                        <td class="empty"></td>
-                        <td class="title">a</td>
-                        <td class="title">b</td>
-                        <td class="title">c</td>
-                        <td class="title">d</td>
-                        <td class="title">e</td>
-                        <td class="title">f</td>
-                        <td class="title">g</td>
-                        <td class="title">h</td>
-                        <td class="empty"></td>
-                    </tr>
-                    <tr>
-                        <td class="title">1</td>
-                        <td class="field dark" id="a1">
-                            <div class="figure ferz" id="Ferz_a1"></div>
-                        </td>
-                        <td class="field white" id="b1">
-                            <div class="figure horse" id="Horse_b1"></div>
-                        </td>
-                        <td class="field dark" id="c1">
-                            <div class="figure oficer" id="Oficer_c1"></div>
-                        </td>
-                        <td class="field white" id="d1">
-                            <div class="figure king" id="King_d1"></div>
-                        </td>
-                        <td class="field dark" id="e1">
-                            <div class="figure quin" id="Quin_e1"></div>
-                        </td>
-                        <td class="field white" id="f1">
-                            <div class="figure oficer" id="Oficer_f1"></div>
-                        </td>
-                        <td class="field dark" id="g1">
-                            <div class="figure horse" id="Horse_g1"></div>
-                        </td>
-                        <td class="field white" id="h1">
-                            <div class="figure ferz" id="Ferz_h1"></div>
-                        </td>
-                        <td class="title">1</td>
-                    </tr>
-                    <tr>
-                        <td class="title">2</td>
-                        <td class="field white" id="a2">
-                            <div class="figure warior" id="Warior_a2"></div>
-                        </td>
-                        <td class="field dark" id="b2">
-                            <div class="figure warior" id="Warior_b2"></div>
-                        </td>
-                        <td class="field white" id="c2">
-                            <div class="figure warior" id="Warior_c2"></div>
-                        </td>
-                        <td class="field dark" id="d2">
-                            <div class="figure warior" id="Warior_d2"></div>
-                        </td>
-                        <td class="field white" id="e2">
-                            <div class="figure warior" id="Warior_e2"></div>
-                        </td>
-                        <td class="field dark" id="f2">
-                            <div class="figure warior" id="Warior_f2"></div>
-                        </td>
-                        <td class="field white" id="g2">
-                            <div class="figure warior" id="Warior_g2"></div>
-                        </td>
-                        <td class="field dark" id="h2">
-                            <div class="figure warior" id="Warior_h2"></div>
-                        </td>
-                        <td class="title">2</td>
-                    </tr>
-                    <tr>
-                        <td class="title">3</td>
-                        <td class="field dark" id="a3"></td>
-                        <td class="field white" id="b3"></td>
-                        <td class="field dark" id="c3"></td>
-                        <td class="field white" id="d3"></td>
-                        <td class="field dark" id="e3"></td>
-                        <td class="field white" id="f3"></td>
-                        <td class="field dark" id="g3"></td>
-                        <td class="field white" id="h3"></td>
-                        <td class="title">3</td>
-                    </tr>
-                    <tr>
-                        <td class="title">4</td>
-                        <td class="field white" id="a4"></td>
-                        <td class="field dark" id="b4"></td>
-                        <td class="field white" id="c4"></td>
-                        <td class="field dark" id="d4"></td>
-                        <td class="field white" id="e4"></td>
-                        <td class="field dark" id="f4"></td>
-                        <td class="field white" id="g4"></td>
-                        <td class="field dark" id="h4"></td>
-                        <td class="title">4</td>
-                    </tr>
-                    <tr>
-                        <td class="title">5</td>
-                        <td class="field dark" id="a5"></td>
-                        <td class="field white" id="b5"></td>
-                        <td class="field dark" id="c5"></td>
-                        <td class="field white" id="d5"></td>
-                        <td class="field dark" id="e5"></td>
-                        <td class="field white" id="f5"></td>
-                        <td class="field dark" id="g5"></td>
-                        <td class="field white" id="h5"></td>
-                        <td class="title">5</td>
-                    </tr>
-                    <tr>
-                        <td class="title">6</td>
-                        <td class="field white" id="a6"></td>
-                        <td class="field dark" id="b6"></td>
-                        <td class="field white" id="c6"></td>
-                        <td class="field dark" id="d6"></td>
-                        <td class="field white" id="e6"></td>
-                        <td class="field dark" id="f6"></td>
-                        <td class="field white" id="g6"></td>
-                        <td class="field dark" id="h6"></td>
-                        <td class="title">6</td>
-                    </tr>
-                    <tr>
-                        <td class="title">7</td>
-                        <td class="field dark" id="a7"></td>
-                        <td class="field white" id="b7"></td>
-                        <td class="field dark" id="c7"></td>
-                        <td class="field white" id="d7"></td>
-                        <td class="field dark" id="e7"></td>
-                        <td class="field white" id="f7"></td>
-                        <td class="field dark" id="g7"></td>
-                        <td class="field white" id="h7"></td>
-                        <td class="title">7</td>
-                    </tr>
-                    <tr>
-                        <td class="title">8</td>
-                        <td class="field white" id="a8"></td>
-                        <td class="field dark" id="b8"></td>
-                        <td class="field white" id="c8"></td>
-                        <td class="field dark" id="d8"></td>
-                        <td class="field white" id="e8"></td>
-                        <td class="field dark" id="f8"></td>
-                        <td class="field white" id="g8"></td>
-                        <td class="field dark" id="h8"></td>
-                        <td class="title">8</td>
-                    </tr>
-                    <tr>
-                        <td class="empty"></td>
-                        <td class="title">a</td>
-                        <td class="title">b</td>
-                        <td class="title">c</td>
-                        <td class="title">d</td>
-                        <td class="title">e</td>
-                        <td class="title">f</td>
-                        <td class="title">g</td>
-                        <td class="title">h</td>
-                        <td class="empty"></td>
-                    </tr>
-                </table>
-<!--                left:<input type="text" id="mouseX">
-                top:<input type="text" id="mouseY"><br /><br />-->
-                <!--field:<input type="text" id="FIELD">-->
-                <div id="HistoryMove"></div>
+            <div class="container" id="Board">
+
             </div>
 
             <div id="footer">
