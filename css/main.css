@@ -42,8 +42,8 @@ DESC STYLE
 ----------------------------
 */
 .desck {
-    width: 350px;
-    height: 350px;
+    width: 550px;
+    height: 550px;
     padding: 15px;
     margin-bottom: 50px;
     border: 1px solid silver;
@@ -51,42 +51,71 @@ DESC STYLE
     position: relative;
 }
 .field {
-    border: 1px solid #222222;
-    width: 35px;
-    height: 35px;
+    border: 1px solid #5a5a5a;
+    width: 55px;
+    height: 55px;
     position: relative;
 }
 .field.dark {
-    background-color: #cccccc;
+    background-color: #5a5a5a;
 }
 .field.white {
     background-color: #ffffff;
 }
 .figure {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #777777;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     z-index: 1;
     position: absolute;
     top: 7px;
     left: 7px;
 }
-.warrior {
-    background-color: #449d44;
+.warrior.black {
+    background: url("../images/warrior_b.png") 100% 100% no-repeat;
+    background-size: cover;
 }
-.ferz {
-    background-color: #2aabd2;
+.warrior.white {
+    background: url("../images/warrior_w.png") 100% 100% no-repeat;
+    background-size: cover;
 }
-.horse {
-    background-color: violet;
+.ferz.black {
+    background: url("../images/ferz_b.png") 100% 100% no-repeat;
+    background-size: cover;
 }
-.elephant {
-    background-color: #c09853;
+.ferz.white {
+    background: url("../images/ferz_w.png") 100% 100% no-repeat;
+    background-size: cover;
 }
-.king {
-    background-color: chartreuse;
+.horse.black {
+    background: url("../images/horse_bl.png") 100% 100% no-repeat;
+    background-size: cover;
 }
-.quin {
-    background-color: gold;
+.horse.white {
+    background: url("../images/horse_wl.png") 100% 100% no-repeat;
+    background-size: cover;
+}
+.elephant.white {
+    background: url("../images/elefant_w.png") 100% 100% no-repeat;
+    background-size: cover;
+}
+.elephant.black {
+    background: url("../images/elefant_b.png") 100% 100% no-repeat;
+    background-size: cover;
+}
+.king.white {
+    background: url("../images/king_w.png") 100% 100% no-repeat;
+    background-size: cover;
+}
+.king.black {
+    background: url("../images/king_b.png") 100% 100% no-repeat;
+    background-size: cover;
+}
+.quin.white {
+    background: url("../images/quin_w.png") 100% 100% no-repeat;
+    background-size: cover;
+}
+.quin.black {
+    background: url("../images/quin_b.png") 100% 100% no-repeat;
+    background-size: cover;
 }
