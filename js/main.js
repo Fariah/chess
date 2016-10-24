@@ -68,6 +68,11 @@ var board = {
         $.each(figures, function (index, value) {
             value.init(index);
         });
+    },
+    clearClickEvents: function(fields) {
+        $.each(fields, function (i, value) {
+            $('#'+value).off();
+        });
     }
 };
 
@@ -125,6 +130,7 @@ var figure = function(data) {
                             $('#'+value).unbind();
                             self.changeActive(self.options.side);
                             board.update();
+                            board.clearClickEvents(fields);
                         });
                     });
                 });
@@ -205,32 +211,33 @@ var figure = function(data) {
                             y = index;
                         }
                     });
+                    x = x*1;
+                    y = y*1;
 
-                    if(((x-2)>0) && y*1-1>0){
-                        result[1] = (alfa[y*1-1])+(x-2);
+                    if(((x-2)>0) && y-1>0){
+                        result[1] = (alfa[y-1])+(x-2);
                     }
-                    if(((x-2)>0) && y*1+1<9){
-                        result[2] = (alfa[y*1+1])+(x-2);
+                    if(((x-2)>0) && y+1<9){
+                        result[2] = (alfa[y+1])+(x-2);
                     }
-                    if(((x-1)>0) && y*1-2>0){
-                        result[3] = (alfa[y*1-2])+(x-1);
+                    if(((x-1)>0) && y-2>0){
+                        result[3] = (alfa[y-2])+(x-1);
                     }
-                    if(((x-1)>0) && y*1+2<9){
-                        result[4] = (alfa[y*1+2])+(x-1);
+                    if(((x-1)>0) && y+2<9){
+                        result[4] = (alfa[y+2])+(x-1);
                     }
 
-
-                    if(((x+1)<9) && y*1-2>0){
-                        result[5] = (alfa[y*1-2])+(x+1);
+                    if(((x+1)<9) && y-2>0){
+                        result[5] = (alfa[y-2])+(x+1);
                     }
-                    if(((x+1)<9) && y*1+2<9){
-                        result[6] = (alfa[y*1+2])+(x+1);
+                    if(((x+1)<9) && y+2<9){
+                        result[6] = (alfa[y+2])+(x+1);
                     }
-                    if(((x+2)<9) && y*1-1>0){
-                        result[7] = (alfa[y*1-1])+(x+2);
+                    if(((x+2)<9) && y-1>0){
+                        result[7] = (alfa[y-1])+(x+2);
                     }
-                    if(((x+2)<9) && y*1+1<9){
-                        result[8] = (alfa[y*1+1])+(x+2);
+                    if(((x+2)<9) && y+1<9){
+                        result[8] = (alfa[y+1])+(x+2);
                     }
 
                     return result;
