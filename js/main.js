@@ -73,9 +73,29 @@ var board = {
         $.each(fields, function (i, value) {
             $('#'+value).off();
         });
+    },
+    checkFigures: function(data, side) {
+        var collision = [], result = data;
+        $.each(figures, function (i, value) {
+            var coord = value.getStringCoord();
+            $.each(data, function (r, field) {
+                if(coord === field && side === value.options.side) {
+                    collision.push(field);
+                }
+            });
+        });
+
+        if($.map(collision, function(n, i) { return i; }).length > 0) {
+            result = [];
+            $.each(data, function (k, el) {
+                if($.inArray(el, collision) == -1) {
+                    result.push(el);
+                }
+            });
+        }
+        return result;
     }
 };
-
 
 var board_types = {
     chess: function () {
@@ -119,6 +139,8 @@ var figure = function(data) {
             var self = this;
             if(active == this.options.side) {
                 figure.click(function (e) {
+                    console.log('click');
+                    $('td.field').off();
                     var fields = self.avialableMoves();
                     $.each(fields, function (i, value) {
                         $('#'+value).click(function(){
@@ -127,7 +149,6 @@ var figure = function(data) {
                             figures[index].options.coords.x = x;
                             figures[index].options.coords.y = y;
                             self.clearHighlight();
-                            $('#'+value).unbind();
                             self.changeActive(self.options.side);
                             board.update();
                             board.clearClickEvents(fields);
@@ -173,6 +194,9 @@ var figure = function(data) {
                 active = 'white';
             }
         },
+        getStringCoord: function () {
+            return this.options.coords.y + this.options.coords.x;
+        },
         warriorsMoves: function(){
             var result = {};
             switch (this.options.side) {
@@ -201,7 +225,7 @@ var figure = function(data) {
             }
         },
         horseMoves: function() {
-            var result = {}, self = this;
+            var result = [], self = this;
             switch (this.options.side) {
                 case 'white':
                     var y = '';
@@ -215,32 +239,32 @@ var figure = function(data) {
                     y = y*1;
 
                     if(((x-2)>0) && y-1>0){
-                        result[1] = (alfa[y-1])+(x-2);
+                        result.push((alfa[y-1])+(x-2));
                     }
                     if(((x-2)>0) && y+1<9){
-                        result[2] = (alfa[y+1])+(x-2);
+                        result.push((alfa[y+1])+(x-2));
                     }
                     if(((x-1)>0) && y-2>0){
-                        result[3] = (alfa[y-2])+(x-1);
+                        result.push((alfa[y-2])+(x-1));
                     }
                     if(((x-1)>0) && y+2<9){
-                        result[4] = (alfa[y+2])+(x-1);
+                        result.push((alfa[y+2])+(x-1));
                     }
 
                     if(((x+1)<9) && y-2>0){
-                        result[5] = (alfa[y-2])+(x+1);
+                        result.push((alfa[y-2])+(x+1));
                     }
                     if(((x+1)<9) && y+2<9){
-                        result[6] = (alfa[y+2])+(x+1);
+                        result.push((alfa[y+2])+(x+1));
                     }
                     if(((x+2)<9) && y-1>0){
-                        result[7] = (alfa[y-1])+(x+2);
+                        result.push((alfa[y-1])+(x+2));
                     }
                     if(((x+2)<9) && y+1<9){
-                        result[8] = (alfa[y+1])+(x+2);
+                        result.push((alfa[y+1])+(x+2));
                     }
 
-                    return result;
+                    return board.checkFigures(result, this.options.side);
                     break;
                 case 'black':
 
