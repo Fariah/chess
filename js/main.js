@@ -74,7 +74,28 @@ var board = {
             $('#'+value).off();
         });
     },
-    checkFigures: function(data, side) {
+    checkHorseCollision: function(data, side) {
+        var collision = [], result = data;
+        $.each(figures, function (i, value) {
+            var coord = value.getStringCoord();
+            $.each(data, function (r, field) {
+                if(coord === field && side === value.options.side) {
+                    collision.push(field);
+                }
+            });
+        });
+
+        if($.map(collision, function(n, i) { return i; }).length > 0) {
+            result = [];
+            $.each(data, function (k, el) {
+                if($.inArray(el, collision) == -1) {
+                    result.push(el);
+                }
+            });
+        }
+        return result;
+    },
+    checkWariorCollision: function(data, side) {
         var collision = [], result = data;
         $.each(figures, function (i, value) {
             var coord = value.getStringCoord();
@@ -198,29 +219,57 @@ var figure = function(data) {
             return this.options.coords.y + this.options.coords.x;
         },
         warriorsMoves: function(){
-            var result = {};
+            var result = [];
             switch (this.options.side) {
                 case 'white':
-                    var move_length = 1;
+                    var move_length = 1, self = this;
+                    var y = '';
+                    var x = self.options.coords.x;
+                    $.each(alfa, function (index, value) {
+                        if(value == self.options.coords.y) {
+                            y = index;
+                        }
+                    });
+
+                    x = x*1;
+                    y = y*1;
+
                     if(this.options.coords.x == 2) {
                         move_length = 2;
                     }
 
                     for(var i=1; i<=move_length; i++) {
-                        result[i] = this.options.coords.y + (parseInt(this.options.coords.x*1) + i);
+                        result.push(self.options.coords.y + (parseInt(x) + i));
                     }
-                    return result;
+                    result.push(alfa[y-1] + (x + 1));
+                    result.push(alfa[y+1] + (x + 1));
+
+                    return board.checkWariorCollision(result, self.options.side);
                     break;
                 case 'black':
-                    var move_length = 1;
+                    var move_length = 1, self = this;
+                    var y = '';
+                    var x = self.options.coords.x;
+                    $.each(alfa, function (index, value) {
+                        if(value == self.options.coords.y) {
+                            y = index;
+                        }
+                    });
+
+                    x = x*1;
+                    y = y*1;
+
                     if(this.options.coords.x == 7) {
                         move_length = 2;
                     }
 
                     for(var i=1; i<=move_length; i++) {
-                        result[i] = this.options.coords.y + (this.options.coords.x - i);
+                        result.push(self.options.coords.y + (parseInt(x) - i));
                     }
-                    return result;
+                    result.push(alfa[y-1] + (x - 1));
+                    result.push(alfa[y+1] + (x - 1));
+
+                    return board.checkWariorCollision(result, self.options.side);
                     break;
             }
         },
@@ -264,7 +313,7 @@ var figure = function(data) {
                         result.push((alfa[y+1])+(x+2));
                     }
 
-                    return board.checkFigures(result, this.options.side);
+                    return board.checkHorseCollision(result, this.options.side);
                     break;
                 case 'black':
 
