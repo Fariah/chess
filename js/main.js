@@ -55,7 +55,7 @@ var board = {
             "8e": new figure({type: 'king', side: 'black', coords: {x:8, y:'e'}}),
             "8f": new figure({type: 'elephant', side: 'black', coords: {x:8, y:'f'}}),
             "8g": new figure({type: 'horse', side: 'black', coords: {x:8, y:'g'}}),
-            "8h": new figure({type: 'ferz', side: 'black', coords: {x:8, y:'h'}}),
+            "8h": new figure({type: 'ferz', side: 'black', coords: {x:8, y:'h'}})
         };
 
         $.each(figures, function (index, value) {
@@ -95,13 +95,27 @@ var board = {
         }
         return result;
     },
-    checkWariorCollision: function(data, side) {
+    checkWariorCollision: function(data, side, x, y) {
         var collision = [], result = data;
         $.each(figures, function (i, value) {
+
             var coord = value.getStringCoord();
+            var figureX = value.options.coords.x;
+            var figureY = value.getNumCoordY();
+
             $.each(data, function (r, field) {
                 if(coord === field && side === value.options.side) {
                     collision.push(field);
+                }
+
+                if(side == 'white' && figureX == (x+1)*1 && figureY == (y-1)*1) {
+                    data.push(alfa[y-1] + (x+1));
+                } else if(side == 'white' && figureX == (x + 1)*1 && figureY == (y+1)*1) {
+                    data.push(alfa[y+1] + (x+1));
+                } else if(side == 'black' && figureX == (x - 1)*1 && figureY == (y-1)*1) {
+                    data.push(alfa[y-1] + (x-1));
+                } else if(side == 'black' && figureX == (x - 1)*1 && figureY == (y+1)*1) {
+                    data.push(alfa[y+1] + (x-1));
                 }
             });
         });
@@ -160,7 +174,6 @@ var figure = function(data) {
             var self = this;
             if(active == this.options.side) {
                 figure.click(function (e) {
-                    console.log('click');
                     $('td.field').off();
                     var fields = self.avialableMoves();
                     $.each(fields, function (i, value) {
@@ -218,18 +231,23 @@ var figure = function(data) {
         getStringCoord: function () {
             return this.options.coords.y + this.options.coords.x;
         },
+        getNumCoordY: function () {
+            var self = this, result = null;
+            $.each(alfa, function (index, value) {
+                if(value == self.options.coords.y) {
+                    result = index;
+                }
+            });
+
+            return result;
+        },
         warriorsMoves: function(){
             var result = [];
             switch (this.options.side) {
                 case 'white':
                     var move_length = 1, self = this;
-                    var y = '';
+                    var y = self.getNumCoordY();
                     var x = self.options.coords.x;
-                    $.each(alfa, function (index, value) {
-                        if(value == self.options.coords.y) {
-                            y = index;
-                        }
-                    });
 
                     x = x*1;
                     y = y*1;
@@ -241,10 +259,10 @@ var figure = function(data) {
                     for(var i=1; i<=move_length; i++) {
                         result.push(self.options.coords.y + (parseInt(x) + i));
                     }
-                    result.push(alfa[y-1] + (x + 1));
-                    result.push(alfa[y+1] + (x + 1));
+                    //result.push(alfa[y-1] + (x + 1));
+                    //result.push(alfa[y+1] + (x + 1));
 
-                    return board.checkWariorCollision(result, self.options.side);
+                    return board.checkWariorCollision(result, self.options.side, x, y);
                     break;
                 case 'black':
                     var move_length = 1, self = this;
@@ -266,10 +284,8 @@ var figure = function(data) {
                     for(var i=1; i<=move_length; i++) {
                         result.push(self.options.coords.y + (parseInt(x) - i));
                     }
-                    result.push(alfa[y-1] + (x - 1));
-                    result.push(alfa[y+1] + (x - 1));
 
-                    return board.checkWariorCollision(result, self.options.side);
+                    return board.checkWariorCollision(result, self.options.side, x, y);
                     break;
             }
         },
