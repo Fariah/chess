@@ -26,36 +26,36 @@ var board = {
         figures = {
             "2a": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'a'}}),
             "2b": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'b'}}),
-            "2c": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'c'}}),
-            "2d": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'d'}}),
-            "2e": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'e'}}),
-            "2f": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'f'}}),
-            "2g": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'g'}}),
-            "2h": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'h'}}),
-            "1a": new figure({type: 'ferz', side: 'white', coords: {x:1, y:'a'}}),
-            "1b": new figure({type: 'horse', side: 'white', coords: {x:1, y:'b'}}),
-            "1c": new figure({type: 'elephant', side: 'white', coords: {x:1, y:'c'}}),
-            "1d": new figure({type: 'quin', side: 'white', coords: {x:1, y:'d'}}),
-            "1e": new figure({type: 'king', side: 'white', coords: {x:1, y:'e'}}),
-            "1f": new figure({type: 'elephant', side: 'white', coords: {x:1, y:'f'}}),
-            "1g": new figure({type: 'horse', side: 'white', coords: {x:1, y:'g'}}),
-            "1h": new figure({type: 'ferz', side: 'white', coords: {x:1, y:'h'}}),
+            //"2c": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'c'}}),
+            //"2d": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'d'}}),
+            //"2e": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'e'}}),
+            //"2f": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'f'}}),
+            //"2g": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'g'}}),
+            //"2h": new figure({type: 'warrior', side: 'white', coords: {x:2, y:'h'}}),
+            //"1a": new figure({type: 'ferz', side: 'white', coords: {x:1, y:'a'}}),
+            //"1b": new figure({type: 'horse', side: 'white', coords: {x:1, y:'b'}}),
+            //"1c": new figure({type: 'elephant', side: 'white', coords: {x:1, y:'c'}}),
+            //"1d": new figure({type: 'quin', side: 'white', coords: {x:1, y:'d'}}),
+            //"1e": new figure({type: 'king', side: 'white', coords: {x:1, y:'e'}}),
+            //"1f": new figure({type: 'elephant', side: 'white', coords: {x:1, y:'f'}}),
+            //"1g": new figure({type: 'horse', side: 'white', coords: {x:1, y:'g'}}),
+            //"1h": new figure({type: 'ferz', side: 'white', coords: {x:1, y:'h'}}),
             "7a": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'a'}}),
             "7b": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'b'}}),
-            "7c": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'c'}}),
-            "7d": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'d'}}),
-            "7e": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'e'}}),
-            "7f": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'f'}}),
-            "7g": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'g'}}),
-            "7h": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'h'}}),
-            "8a": new figure({type: 'ferz', side: 'black', coords: {x:8, y:'a'}}),
-            "8b": new figure({type: 'horse', side: 'black', coords: {x:8, y:'b'}}),
-            "8c": new figure({type: 'elephant', side: 'black', coords: {x:8, y:'c'}}),
-            "8d": new figure({type: 'quin', side: 'black', coords: {x:8, y:'d'}}),
-            "8e": new figure({type: 'king', side: 'black', coords: {x:8, y:'e'}}),
-            "8f": new figure({type: 'elephant', side: 'black', coords: {x:8, y:'f'}}),
-            "8g": new figure({type: 'horse', side: 'black', coords: {x:8, y:'g'}}),
-            "8h": new figure({type: 'ferz', side: 'black', coords: {x:8, y:'h'}})
+            //"7c": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'c'}}),
+            //"7d": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'d'}}),
+            //"7e": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'e'}}),
+            //"7f": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'f'}}),
+            //"7g": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'g'}}),
+            //"7h": new figure({type: 'warrior', side: 'black', coords: {x:7, y:'h'}}),
+            //"8a": new figure({type: 'ferz', side: 'black', coords: {x:8, y:'a'}}),
+            //"8b": new figure({type: 'horse', side: 'black', coords: {x:8, y:'b'}}),
+            //"8c": new figure({type: 'elephant', side: 'black', coords: {x:8, y:'c'}}),
+            //"8d": new figure({type: 'quin', side: 'black', coords: {x:8, y:'d'}}),
+            //"8e": new figure({type: 'king', side: 'black', coords: {x:8, y:'e'}}),
+            //"8f": new figure({type: 'elephant', side: 'black', coords: {x:8, y:'f'}}),
+            //"8g": new figure({type: 'horse', side: 'black', coords: {x:8, y:'g'}}),
+            //"8h": new figure({type: 'ferz', side: 'black', coords: {x:8, y:'h'}})
         };
 
         $.each(figures, function (index, value) {
@@ -97,24 +97,30 @@ var board = {
     },
     checkWariorCollision: function(data, side, x, y) {
         var collision = [], result = data;
+
         $.each(figures, function (i, value) {
 
             var coord = value.getStringCoord();
-            var figureX = value.options.coords.x;
+            var figureX = value.getNumCoordX();
             var figureY = value.getNumCoordY();
-
+            var figureSide = value.options.side;
             $.each(data, function (r, field) {
-                if(coord === field && side === value.options.side) {
+                if(coord == field && side == figureSide) {
                     collision.push(field);
                 }
+                // side - side of the clicked figure
+                // figureSide - side of the another figure
 
-                if(side == 'white' && figureX == (x+1)*1 && figureY == (y-1)*1) {
+                if(side != figureSide && figureX == (x+1)*1 && figureY == (y-1)*1) {
                     data.push(alfa[y-1] + (x+1));
-                } else if(side == 'white' && figureX == (x + 1)*1 && figureY == (y+1)*1) {
+
+                } else if(side != figureSide && figureX == (x + 1)*1 && figureY == (y+1)*1) {
                     data.push(alfa[y+1] + (x+1));
-                } else if(side == 'black' && figureX == (x - 1)*1 && figureY == (y-1)*1) {
+
+                } else if(side != figureSide && figureX == (x - 1)*1 && figureY == (y-1)*1) {
                     data.push(alfa[y-1] + (x-1));
-                } else if(side == 'black' && figureX == (x - 1)*1 && figureY == (y+1)*1) {
+
+                } else if(side != figureSide && figureX == (x - 1)*1 && figureY == (y+1)*1) {
                     data.push(alfa[y+1] + (x-1));
                 }
             });
@@ -231,6 +237,9 @@ var figure = function(data) {
         getStringCoord: function () {
             return this.options.coords.y + this.options.coords.x;
         },
+        getNumCoordX: function () {
+            return this.options.coords.x;
+        },
         getNumCoordY: function () {
             var self = this, result = null;
             $.each(alfa, function (index, value) {
@@ -243,14 +252,15 @@ var figure = function(data) {
         },
         warriorsMoves: function(){
             var result = [];
+            var move_length = 1, self = this;
+            var y = self.getNumCoordY();
+            var x = self.getNumCoordX();
+            var side = self.options.side;
+
+            x = x*1;
+            y = y*1;
             switch (this.options.side) {
                 case 'white':
-                    var move_length = 1, self = this;
-                    var y = self.getNumCoordY();
-                    var x = self.options.coords.x;
-
-                    x = x*1;
-                    y = y*1;
 
                     if(this.options.coords.x == 2) {
                         move_length = 2;
@@ -262,20 +272,21 @@ var figure = function(data) {
                     //result.push(alfa[y-1] + (x + 1));
                     //result.push(alfa[y+1] + (x + 1));
 
-                    return board.checkWariorCollision(result, self.options.side, x, y);
+                    return board.checkWariorCollision(result, side, x, y);
                     break;
                 case 'black':
-                    var move_length = 1, self = this;
-                    var y = '';
-                    var x = self.options.coords.x;
-                    $.each(alfa, function (index, value) {
-                        if(value == self.options.coords.y) {
-                            y = index;
-                        }
-                    });
-
-                    x = x*1;
-                    y = y*1;
+                    //var move_length = 1, self = this;
+                    //var y = self.getNumCoordY();
+                    //var x = self.getNumCoordX();
+                    //var side = self.options.side;
+                    ////$.each(alfa, function (index, value) {
+                    ////    if(value == self.options.coords.y) {
+                    ////        y = index;
+                    ////    }
+                    ////});
+                    //
+                    //x = x*1;
+                    //y = y*1;
 
                     if(this.options.coords.x == 7) {
                         move_length = 2;
